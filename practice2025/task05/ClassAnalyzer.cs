@@ -20,10 +20,10 @@ public class ClassAnalyzer
         => _type.GetMethod(methodName).GetParameters().Select(x => x.Name);
 
     public IEnumerable<string> GetAllFields()
-        => _type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Select(x => x.Name);
+        => _type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Select(x => x.Name);
 
     public IEnumerable<string> GetProperties()
-        => _type.GetProperties().Select(x => x.Name);
+        => _type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).Select(x => x.Name);
 
     public bool HasAttribute<T>() where T : Attribute
         => _type.GetCustomAttributes<T>().Any();
