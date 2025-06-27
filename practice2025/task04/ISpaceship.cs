@@ -2,9 +2,9 @@
 
 public interface ISpaceship
 {
-    string MoveForward();      
-    string Rotate(int angle);  
-    string Fire();           
-    int Speed { get; }      
-    int FirePower { get; }   
+    string MoveForward();
+    string Rotate(int angle);
+    string Fire();
+    int Speed { get; }
+    int FirePower { get; }
 }
