@@ -8,17 +8,23 @@ public class SpaceshipTests
     [Fact]
     public void Cruiser_ShouldHaveCorrectStats()
     {
-        ISpaceship cruiser = new Cruiser();
+        Cruiser cruiser = new Cruiser();
         Assert.Equal(50, cruiser.Speed);
         Assert.Equal(100, cruiser.FirePower);
+        Assert.Equal(0, cruiser.Position);
+        Assert.Equal(0, cruiser.Angle);
+        Assert.Equal(0, cruiser.DamageDone);
     }
 
     [Fact]
     public void Fighter_ShouldHaveCorrectStats()
     {
-        ISpaceship fighter = new Fighter();
+        Fighter fighter = new Fighter();
         Assert.Equal(100, fighter.Speed);
         Assert.Equal(50, fighter.FirePower);
+        Assert.Equal(0, fighter.Position);
+        Assert.Equal(0, fighter.Angle);
+        Assert.Equal(0, fighter.DamageDone);
     }
 
     [Fact]
@@ -41,31 +47,55 @@ public class SpaceshipTests
     public void Fighter_MovesCorrectly()
     {
         var fighter = new Fighter();
-        string result = fighter.MoveForward();
-        Assert.Equal("Корабль движется со скоростью 100 м/c.", result);
+        double curPos = fighter.Position;
+        fighter.MoveForward();
+        double newPosExpect = curPos + fighter.Speed;
+        Assert.Equal(100, newPosExpect);
     }
 
     [Fact]
     public void Cruiser_MovesCorrectly()
     {
         var cruiser = new Cruiser();
-        string result = cruiser.MoveForward();
-        Assert.Equal("Корабль движется со скоростью 50 м/c.", result);
+        double curPos = cruiser.Position;
+        cruiser.MoveForward();
+        double newPosExpect = curPos + cruiser.Speed;
+        Assert.Equal(50, newPosExpect);
     }
 
     [Fact]
     public void Fighter_ShootsCorrectly()
     {
         var fighter = new Fighter();
-        string result = fighter.Fire();
-        Assert.Equal("Корабль нанес 50 единиц урона.", result);
+        double curDamage = fighter.DamageDone;
+        fighter.Fire();
+        double newDamageExpect = curDamage + fighter.FirePower;
+        Assert.Equal(50, newDamageExpect);
     }
 
     [Fact]
     public void Cruiser_ShootsCorrectly()
     {
         var cruiser = new Cruiser();
-        string result = cruiser.Fire();
-        Assert.Equal("Корабль нанес 100 единиц урона.", result);
+        double curDamage = cruiser.DamageDone;
+        cruiser.Fire();
+        double newDamageExpect = curDamage + cruiser.FirePower;
+        Assert.Equal(100, newDamageExpect);
+    }
+
+    [Fact]
+    public void Fighter_RotatesCorrectly()
+    {
+        var fighter = new Fighter();
+        fighter.Rotate(45);
+        Assert.Equal(45, fighter.Angle);
+    }
+
+    [Fact]
+    public void Cruiser_RotatesCorrectly()
+    {
+        var cruiser = new Cruiser();
+        cruiser.Rotate(45);
+        Assert.Equal(45, cruiser.Angle);
     }
 }

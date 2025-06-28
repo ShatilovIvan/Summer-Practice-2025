@@ -4,19 +4,22 @@ public class Fighter : ISpaceship
 {
     public int Speed { get; } = 100;
     public int FirePower { get; } = 50;
+    public double Position { get; set; } = 0;
+    public double Angle { get; set; } = 0;
+    public double DamageDone { get; set; } = 0;
 
-    public string MoveForward()
+    public void MoveForward()
     {
-        return $"Корабль движется со скоростью {Speed} м/c.";
+        Position += Speed;
     }
 
-    public string Rotate(int angle)
+    public void Rotate(int angle)
     {
-        return $"Корабль повернулся на {angle} градусов.";
+        Angle = (Angle + angle) % 360;
     }
 
-    public string Fire()
+    public void Fire()
     {
-        return $"Корабль нанес {FirePower} единиц урона.";
+        DamageDone += FirePower;
     }
 }
