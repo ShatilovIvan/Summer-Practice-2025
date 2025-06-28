@@ -26,6 +26,7 @@ public class ClassAnalyzerTests
         var methods = analyzer.GetPublicMethods();
 
         Assert.Contains("Method", methods);
+        Assert.Contains("MethodWithParameters", methods);
     }
 
     [Fact]
@@ -36,6 +37,15 @@ public class ClassAnalyzerTests
 
         Assert.Contains("param1", parameters);
         Assert.Contains("param2", parameters);
+    }
+
+    [Fact]
+    public void GetMethodParams_ReturnsNoParameters()
+    {
+        var analyzer = new ClassAnalyzer(typeof(TestClass));
+        var parameters = analyzer.GetMethodParams("Method");
+
+        Assert.Empty(parameters);
     }
 
     [Fact]
