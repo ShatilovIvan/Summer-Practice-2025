@@ -54,3 +54,18 @@ public class AttributesTest
         ReflectionHelper.PrintTypeInfo(type);
     }
 }
+
+public class ReflectionHelperTest
+{
+    [Fact]
+    public void ReflectionHelper_PrintsCorrectData()
+    {
+        var type = typeof(SampleClass);
+        var output = new StringWriter();
+        var expectedOutput = "Class Name: Пример класса\nClass version: 1.0\nMethods: Тестовый метод\nProperties: Числовое свойство";
+        Console.SetOut(output);
+        ReflectionHelper.PrintTypeInfo(type);
+
+        Assert.Contains(expectedOutput, output.ToString());
+    }
+}
