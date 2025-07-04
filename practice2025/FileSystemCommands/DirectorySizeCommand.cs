@@ -18,5 +18,7 @@ public class DirectorySizeCommand : CommandLib.ICommand
         var files = directoryInfo.EnumerateFiles().ToList();
 
         Size = files.Select(file => file.Length).Sum();
+
+        Console.WriteLine(Size);
     }
 }

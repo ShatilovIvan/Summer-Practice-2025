@@ -1,4 +1,6 @@
-﻿namespace FileSystemCommands
+﻿using System.Text;
+
+namespace FileSystemCommands
 {
     public class FindFilesCommand : CommandLib.ICommand
     {
@@ -18,6 +20,12 @@
                 throw new DirectoryNotFoundException($"The directory '{Path}' does not exist.");
 
             Files = Directory.GetFiles(Path, Mask, SearchOption.AllDirectories).ToList();
+            
+            var sb = new StringBuilder();
+
+            Files.ForEach(s => sb.Append($"{s}\n"));
+
+            Console.WriteLine(sb);
         }
     }
 }
