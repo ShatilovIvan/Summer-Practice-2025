@@ -89,14 +89,18 @@ public class CommandRunnerTests
         string baseDir = Directory.GetCurrentDirectory();
         var commandRunner = Path.Combine(baseDir, "CommandRunner");
 
+        Console.WriteLine(commandRunner);
+
         var proc = new Process();
         proc.StartInfo.FileName = commandRunner;
         proc.StartInfo.RedirectStandardOutput = true;
         proc.Start();
         proc.WaitForExit();
 
-        Assert.Contains("10", proc.StandardOutput.ReadToEnd());
-        Assert.Contains("/home/runner/work/Summer-Practice-2025/Summer-Practice-2025/practice2025/TestDir/test1.txt", proc.StandardOutput.ReadToEnd());
-        Assert.Contains("/home/runner/work/Summer-Practice-2025/Summer-Practice-2025/practice2025/TestDir/test2.txt", proc.StandardOutput.ReadToEnd());
+        string output = proc.StandardOutput.ReadToEnd();
+
+        Assert.Contains("10", output);
+        Assert.Contains("/home/runner/work/Summer-Practice-2025/Summer-Practice-2025/practice2025/TestDir/test1.txt", output);
+        Assert.Contains("/home/runner/work/Summer-Practice-2025/Summer-Practice-2025/practice2025/TestDir/test2.txt", output);
     }
 }
