@@ -24,8 +24,6 @@ namespace FileSystemCommands
             var sb = new StringBuilder();
 
             Files.ForEach(s => sb.Append($"{s}\n"));
-
-            Console.WriteLine(sb);
         }
     }
 }
