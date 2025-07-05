@@ -91,7 +91,7 @@ public class CommandRunnerTests
 
         Console.WriteLine(commandRunner);
 
-        var proc = new Process();
+        using Process proc = new Process();
         proc.StartInfo.FileName = commandRunner;
         proc.StartInfo.RedirectStandardOutput = true;
         proc.Start();
