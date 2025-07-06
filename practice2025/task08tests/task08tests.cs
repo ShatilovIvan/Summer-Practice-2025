@@ -11,7 +11,7 @@ public class FileSystemCommandsTests
     {
         string? baseDir = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
 
-        if (baseDir == null)
+        if (baseDir is null)
             throw new DirectoryNotFoundException("Couldn't find base directory!\n");
 
         var testDir = Path.Combine(baseDir, "TestDir");
@@ -33,7 +33,7 @@ public class FileSystemCommandsTests
     {
         string? baseDir = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
 
-        if (baseDir == null)
+        if (baseDir is null)
             throw new DirectoryNotFoundException("Couldn't find base directory!\n");
 
         var nonExistentDir = Path.Combine(baseDir, "NonExistentDir");
@@ -47,7 +47,7 @@ public class FileSystemCommandsTests
     {
         string? baseDir = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
 
-        if (baseDir == null)
+        if (baseDir is null)
             throw new DirectoryNotFoundException("Couldn't find base directory!\n");
 
         var testDir = Path.Combine(baseDir, "TestDir");
@@ -71,7 +71,7 @@ public class FileSystemCommandsTests
     {
         string? baseDir = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
 
-        if (baseDir == null)
+        if (baseDir is null)
             throw new DirectoryNotFoundException("Couldn't find base directory!\n");
 
         var nonExistentDir = Path.Combine(baseDir, "NonExistentDir");
