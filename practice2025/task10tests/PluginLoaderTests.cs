@@ -21,4 +21,17 @@ public class PluginLoaderTests
 
         Assert.Contains(expectedOutput, stringWriter.ToString());
     }
+
+    [Fact]
+    public void PluginLoader_NoPluginsInDirectory()
+    {
+        var slnDirectory = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
+
+        if (slnDirectory is null)
+            throw new DirectoryNotFoundException("Couldn't find base directory!\n");
+
+        var nonExistingDirectory = Path.Combine(slnDirectory, "NonExestingDirectory");
+
+        Assert.Throws<DirectoryNotFoundException>(() => PluginLoader.LoadPlugins(nonExistingDirectory));
+    }
 }
