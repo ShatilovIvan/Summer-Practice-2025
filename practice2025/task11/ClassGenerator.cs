@@ -41,6 +41,10 @@ public class ClassGenerator
         Assembly assembly = Assembly.Load(stream.ToArray());
 
         Type? calculatorType = assembly.GetType("Calculator");
+
+        if (calculatorType is null)
+            throw new ArgumentNullException("Couldn't find the 'Calculator' type!");
+
         ICalculator? typeInstance = Activator.CreateInstance(calculatorType) as ICalculator;
 
         if (typeInstance is null)
