@@ -11,6 +11,7 @@ public interface ICalculator
     public int Mul(int a, int b);
     public int Div(int a, int b);
 }
+
 public class ClassGenerator
 {
     public static ICalculator Generate()
