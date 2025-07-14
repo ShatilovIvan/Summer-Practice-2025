@@ -10,7 +10,7 @@ public class DefiniteIntegral
         _result = 0.0;
         double range = b - a;
         double stepSize = range / threadsnumber;
-        var barrier = new Barrier(threadsnumber + 1);
+        using Barrier barrier = new Barrier(threadsnumber + 1);
 
         for (int i = 0; i < threadsnumber; i++)
         {
@@ -27,7 +27,6 @@ public class DefiniteIntegral
         }
 
         barrier.SignalAndWait();
-
         return _result;
     }
 
