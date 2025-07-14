@@ -49,6 +49,44 @@ public class StudentSerializerTests
         File.Delete("student.json");
     }
 
+    
+    [Fact]
+    public void StudentSerializerTests_SerializeIgnoresNullProperties()
+    {
+        Student student = new Student("Mark", "Zukerberg", new DateTime(2000, 1, 1), null!);
+
+        var serializer = new StudentSerializer("dd-MM-yyyy");
+
+        serializer.Serialize(student, "student.json");
+
+        string expectedJSON = "{\n  \"FirstName\": \"Mark\",\n  \"LastName\": \"Zukerberg\",\n  \"BirthDate\": \"01-01-2000\"\n}";
+
+        string actualJSON = File.ReadAllText("student.json");
+
+        Assert.Equal(expectedJSON, actualJSON);
+
+        File.Delete("student.json");
+    }
+
+    [Fact]
+    public void StudentSerializerTests_DeserializeIgnoresNullProperties()
+    {
+        string json = "{\n  \"FirstName\": \"Mark\",\n  \"LastName\": \"Zukerberg\",\n  \"BirthDate\": \"01-01-2000\"\n}";
+
+        File.WriteAllText("student.json", json);
+
+        var serializer = new StudentSerializer("dd-MM-yyyy");
+
+        Student student = serializer.Deserialize("student.json");
+
+        Assert.Equal("Mark", student.FirstName);
+        Assert.Equal("Zukerberg", student.LastName);
+        Assert.Equal(new DateTime(2000, 1, 1), student.BirthDate);
+        Assert.Null(student.Grades);
+
+        File.Delete("student.json");
+    }
+
     [Fact]
     public void StudentSerializerTests_SerializeThrowsArgumentNullExceptionForNullStudent()
     {
