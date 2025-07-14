@@ -12,21 +12,29 @@ public class DefiniteIntegral
         double stepSize = range / threadsnumber;
         using Barrier barrier = new Barrier(threadsnumber + 1);
 
+        Thread[] threads = new Thread[threadsnumber];
+
         for (int i = 0; i < threadsnumber; i++)
         {
             double threadStart = a + i * stepSize;
             double threadEnd = (i == threadsnumber - 1) ? b : threadStart + stepSize;
 
-            Thread thread = new Thread(() =>
+            threads[i] = new Thread(() =>
             {
                 SolvePartially(threadStart, threadEnd, function, step);
                 barrier.SignalAndWait();
             });
 
-            thread.Start();
+            threads[i].Start();
         }
 
         barrier.SignalAndWait();
+        
+        foreach (var thread in threads)
+        {
+            thread.Join();
+        }
+
         return _result;
     }
 
