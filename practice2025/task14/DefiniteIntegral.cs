@@ -41,10 +41,15 @@ public class DefiniteIntegral
     private static void SolvePartially(double a, double b, Func<double, double> function, double step)
     {
         double current = 0.0;
+        double next = 0.0;
+        double nextVal = 0.0;
 
         for (double x = a; x < b; x += step)
         {
-            current += function(x) * step;
+            next = Math.Min(x + step, b);
+            nextVal = function(next);
+
+            current += (function(x) + nextVal) * (next - x) / 2.0;
         }
 
         while (!IncrementResult(current))
