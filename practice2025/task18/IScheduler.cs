@@ -3,6 +3,6 @@
 public interface IScheduler
 {
     bool HasCommand();
-    CommandLib.ICommand Select(); 
+    CommandLib.ICommand Select();
     void Add(CommandLib.ICommand cmd);
 }

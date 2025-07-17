@@ -37,7 +37,7 @@ public class SchedulerThread
                 {
                     cmd.Execute();
                 }
-                
+
                 catch (Exception ex)
                 {
                     ExceptionHandler.Handle(ex, cmd);
@@ -51,7 +51,7 @@ public class SchedulerThread
             if (_softStopRequested && _queue.Count == 0)
                 break;
 
-            if (_queue.TryTake(out command, 100)) 
+            if (_queue.TryTake(out command, 100))
             {
                 try
                 {
@@ -64,7 +64,7 @@ public class SchedulerThread
             }
             else
             {
-                Thread.Sleep(10); 
+                Thread.Sleep(10);
             }
         }
     }
